@@ -102,4 +102,7 @@ You can use the metabase locally to create visualizations.
 docker run -d -p 3000:3000 --name metabase metabase/metabase
 ```
 
-The final visualization report is exported to pdf, you can check here.
+The final visualization report is exported to pdf, you can check [here](https://github.com/SitaraJin/zoomcamp_project_2025/blob/0fdab94ce166f64b134aa94984b6f2af2b8bf6dc/visualization/Listener%20Preferences.pdf).
+
+
+![image](https://github.com/SitaraJin/zoomcamp_project_2025/blob/main/visualization/image0.png)
