@@ -1,0 +1,65 @@
+id: data_load_to_gcp
+namespace: zoomcamp-project
+description: |
+  The CSV Data used in the course: https://www.kaggle.com/api/v1/datasets/download/atharvasoundankar/global-music-streaming-trends-and-listener-insights
+
+tasks:
+  - id: extract
+    description: "使用curl下载并解压Kaggle数据集"
+    type: io.kestra.plugin.scripts.shell.Commands
+    outputFiles:
+      - "*.csv"
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - apt-get update
+      - apt-get install -y curl unzip
+      - curl -L -o dataset.zip https://www.kaggle.com/api/v1/datasets/download/atharvasoundankar/global-music-streaming-trends-and-listener-insights
+      - unzip -o dataset.zip
+      
+
+
+  - id: upload_to_gcs
+    type: io.kestra.plugin.gcp.gcs.Upload
+    description: "将CSV文件上传到GCS存储桶"
+    from: "{{outputs.extract.outputFiles['Global_Music_Streaming_Listener_Preferences.csv']}}"
+    to: "gs://{{kv('GCP_BUCKET_NAME')}}/Global_Music_Streaming_Listener_Preferences.csv"
+
+
+  - id: load_to_bigquery
+    type: io.kestra.plugin.gcp.bigquery.Query
+    description: "创建表并加载数据到BigQuery"
+    sql: |
+      CREATE OR REPLACE EXTERNAL TABLE `{{kv('GCP_PROJECT_ID')}}.zoomcamp_project.Global_Music_Streaming_Listener_Preferences_ext` (
+        User_ID STRING,
+        Age INT64,
+        Country STRING,
+        Streaming_Platform STRING,
+        Top_Genre STRING,
+        Minutes_Streamed_Per_Day INT64,
+        Number_of_Songs_Liked INT64,
+        Most_Played_Artist STRING,
+        Subscription_Type STRING,
+        Listening_Time STRING,
+        Discover_Weekly_Engagement NUMERIC,
+        Repeat_Song_Rate NUMERIC
+      )
+      OPTIONS (
+        format = 'CSV',
+        uris = ['gs://{{kv('GCP_BUCKET_NAME')}}/Global_Music_Streaming_Listener_Preferences.csv'],
+        skip_leading_rows = 1
+      );
+
+      CREATE OR REPLACE TABLE `{{kv('GCP_PROJECT_ID')}}.zoomcamp_project.Listener_Preferences`
+      CLUSTER BY Streaming_Platform, Subscription_Type AS (
+      SELECT * FROM `{{kv('GCP_PROJECT_ID')}}.zoomcamp_project.Global_Music_Streaming_Listener_Preferences_ext`);
+  
+
+
+pluginDefaults:
+  - type: io.kestra.plugin.gcp
+    values:
+      serviceAccount: "{{kv('GCP_CREDS')}}"
+      projectId: "{{kv('GCP_PROJECT_ID')}}"
+      location: "{{kv('GCP_LOCATION')}}"
+      bucket: "{{kv('GCP_BUCKET_NAME')}}"

@@ -1,4 +1,4 @@
-# Project Data Engineering Zoomcamp 2025
+# Project Data Engineering Zoomcamp 2024
 
 This repository contains my final project for the Data Engineering Zoomcamp cohort 2025 taught by DataTalksClub. The course's repository can be found [here](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main).
 
@@ -6,23 +6,23 @@ This repository contains my final project for the Data Engineering Zoomcamp coho
 
 The objective of the final project is to build an end-to-end data pipeline with a chosen dataset. It should contaiin the following items:
 
-- Select a dataset
-- Create a pipeline to load the data into a datalake
-- Create a pipeline to move the data into a data warehouse
-- Transform the data in the data warehouse
-- Build a dashboard to visualize the data
+* Select a dataset
+* Create a pipeline to load the data into a datalake
+* Create a pipeline to move the data into a data warehouse
+* Transform the data in the data warehouse
+* Build a dashboard to visualize the data
 
 ## Technologies used
 
 The following technologies will be used:
 
-- IaC: Terraform
-- Cloud: GCP
-- Workflow orchestation: Kestra
-- Data Lake: Google Cloud Storage
-- Data Warehouse: Google BigQuery
-- Data transformation: DBT
-- Visualization: Metabase
+* IaC: Terraform
+* Cloud: GCP
+* Workflow orchestation: Kestra
+* Data Lake: Google Cloud Storage
+* Data Warehouse: Google BigQuery
+* Data transformation: DBT
+* Visualization: Metabase
 
 ## Problem description
 
@@ -34,7 +34,7 @@ The project can be summarized as follows:
 
 1. Build the needed infrastructure using Terraform
 2. Ingest dataset into GCS from the given link using Kestra
-3. Transfer dataset from GCS to BigQuery using Kestra
+3. Transfer dataset from GCS to BigQuery  using Kestra
 4. Transform data in Bigquery using dbt
 5. Visualize data in dashboard using Metabase
 
@@ -46,23 +46,23 @@ The project can be summarized as follows:
 
 Additionally, the following must be done:
 
-- Under IAM & Admin > IAM, add the following roles to the newly created service account: Storage Admin + Storage Object Admin + BigQuery Admin
+* Under IAM & Admin > IAM, add the following roles to the newly created service account: Storage Admin + Storage Object Admin + BigQuery Admin
 
 ## Terraform
 
 In this part all the necessary infrastructure will be created:
 
-- GCS bucket
-- Big Query dataset
+* GCS bucket
+* Big Query dataset
 
 Before running terraform, you must modify the file `variables.tf` to your personal details.
 
-Run `terraform init` to initialize terraform. Then run `terraform apply` to build the infrastructure. When this is done, GCS bucket and Big Query Dataset will be created in the GCP project.  
+Run `terraform init` to initialize terraform. Then run `terraform apply` to build the infrastructure. When this is done, GCS bucket and Big Query Dataset will be created in the GCP project.\
 To destroy them, run `terraform destroy`.
 
 ## Kestra
 
-This part is needed to extract data and save it in GCS and Big Query.
+This part is needed to extract data and save it in GCS and Big Query. 
 
 The Pipeline of extracting the data, loading the data into GCS and moving the data into Big Query as follows:
 
@@ -80,7 +80,7 @@ The task `upload_to_gcs` in the flow named `data_load_to_gcp` is responsible of 
 
 ## Data Warehouse in Big Query
 
-Once the dataset is already in a bucket in GCS, we can create and external table in Google Big Query as our Data Warehouse, then process the values ​​in the column names that do not meet the requirements, and finally generate a table partitioned by loaded date in BigQuery, you can see the whole process in the task `load_to_bigquery` of the flow named `data_load_to_gcp`
+Once the dataset is already in a bucket in GCS, we can create and external table in Google Big Query as our Data Warehouse, then process the values ​​in the column names that do not meet the requirements, and finally generate a  table partitioned by loaded date in BigQuery, you can see the whole process in the task `load_to_bigquery` of the flow named `data_load_to_gcp`
 
 ## Transformations in DBT
 
@@ -90,7 +90,7 @@ Open the dbt project and run the job so that the dbt pipeline is executed. When 
 
 ## Visualization in metabse
 
-You can use the metabase locally to create visualizations.
+You can use the metabase locally to create visualizations. 
 
 ```
 docker run -d -p 3000:3000 --name metabase metabase/metabase
