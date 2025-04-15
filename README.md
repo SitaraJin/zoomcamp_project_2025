@@ -24,6 +24,8 @@ The following technologies will be used:
 - Data transformation: DBT
 - Visualization: Metabase
 
+![image](https://github.com/SitaraJin/zoomcamp_project_2025/blob/main/visualization/%E6%97%A0%E6%A0%87%E9%A2%98-2025-04-15-2255.png)
+
 ## Problem description
 
 This project will use the dataset " Global Music Streaming Trends & Listener Insights", that can be found [here](https://www.kaggle.com/datasets/atharvasoundankar/global-music-streaming-trends-and-listener-insights/data)). This is an open source dataset found in Kaggle.
