@@ -17,7 +17,9 @@ SELECT
         Subscription_Type,
         Listening_Time,
         Discover_Weekly_Engagement,
-        Repeat_Song_Rate
+        Repeat_Song_Rate,
+        current_date as loaded_time
+    from
     {{ source('staging','Listener_Preferences') }}
 
 -- dbt build --select <model_name> --vars '{"is_test_run": false}'
