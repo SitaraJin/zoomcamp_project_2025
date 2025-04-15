@@ -1,7 +1,7 @@
 {{ config(
     materialized='table',
     partition_by={
-      "field": "Country",
+      "field": "loaded_time",
     }
 )}}
 
