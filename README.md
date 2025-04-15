@@ -94,6 +94,8 @@ Open the dbt project and run the job so that the dbt pipeline is executed. When 
 
 [dbt](https://github.com/SitaraJin/zoomcamp_project_2025/tree/7b232bdf3cd79bca1abeb15c02a9b5947a6e1be7/dbt)
 
+![image](https://github.com/SitaraJin/zoomcamp_project_2025/blob/main/visualization/dbt.png)
+
 ## Visualization in metabse
 
 You can use the metabase locally to create visualizations.
