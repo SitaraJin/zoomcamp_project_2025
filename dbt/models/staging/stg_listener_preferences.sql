@@ -18,6 +18,7 @@ SELECT
         Listening_Time,
         Discover_Weekly_Engagement,
         Repeat_Song_Rate
+    from
     {{ source('staging','Listener_Preferences') }}
 
 -- dbt build --select <model_name> --vars '{"is_test_run": false}'
