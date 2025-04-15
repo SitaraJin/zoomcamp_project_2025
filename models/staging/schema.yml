@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: staging
+    database: zoomcamp-project-456515
+    schema: zoomcamp_project
+
+    tables:
+      - name: Listener_Preferences
